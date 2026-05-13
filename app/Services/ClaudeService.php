@@ -16,7 +16,7 @@ class ClaudeService
             Opening Hours: Monday to Saturday, 9AM to 6PM
 
             Services:
-            - Web Development
+            - Web Development1
             - AI Chatbots
             - Web Designing
             - Mobile Apps
