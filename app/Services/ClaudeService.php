@@ -9,20 +9,12 @@ class ClaudeService
 {
     public function ask(string $message): string
     {
+        $documentService = new DocumentService;
+
+        $documents = $documentService->readAllDocuments();
+
         // 🧠 Business knowledge
-        $businessInfo = '
-            Business Name: Sysbi Technologies Limited
-            Location: Rawalpindi, Pakistan
-            Opening Hours: Monday to Saturday, 9AM to 6PM
-
-            Services:
-            - Web Development1
-            - AI Chatbots
-            - Web Designing
-            - Mobile Apps
-
-            Website: https://google.com
-
+        $instructions = '
             IMPORTANT RULES:
             - Do NOT use markdown
             - Use simple text only
@@ -43,7 +35,7 @@ class ClaudeService
 
             'model' => 'claude-opus-4-7',
 
-            'max_tokens' => 500,
+            'max_tokens' => 2000,
 
             'messages' => [
                 [
@@ -52,9 +44,15 @@ class ClaudeService
                     'content' => "
                     You are a professional WhatsApp business assistant.
 
-                    $businessInfo
+                    Use the business info and uploaded documents below to answer user questions.
 
-                    User Message:
+                    BUSINESS INFO:
+                    $instructions
+
+                    DOCUMENT CONTENT:
+                    $documents
+
+                    USER MESSAGE:
                     $message
                     ",
                 ],
